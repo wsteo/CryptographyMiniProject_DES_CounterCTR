@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1593766635 source:c:\users\weisong\desktop\projects\github\cryptographyminiproject_des_counterctr\main.cpp
+	<iostream>
+	"KeyGen.h"
+
+1593766666 c:\users\weisong\desktop\projects\github\cryptographyminiproject_des_counterctr\keygen.h
+	<iostream>
+	<string>
+

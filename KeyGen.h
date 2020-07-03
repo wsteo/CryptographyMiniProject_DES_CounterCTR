@@ -175,7 +175,7 @@ void KeyGen (int rKeys[16][48]) {
         }
     }
 }
-
+/*
 int main()
 {
     int rKeys [16][48];
@@ -184,5 +184,5 @@ int main()
     PrintAllSubKeys (rKeys);
     return 0;
 }
-
+*/
 #endif // KEYGEN_H_INCLUDED
