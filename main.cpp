@@ -4,24 +4,38 @@
 
 using namespace std;
 
-int block[64], IP[64];
+int block[64], IP[64], leftB[32], rightB[32], expansion[48];
 
-void IP_Function()
-{
-    int count_=0;
-    for (int i = 57; i < 64; i = i+2)
-    {
-        for (int k = i; k> 0; k -= 8)
-        {
-            IP[count_++] = block[k];
+void Expansion_Function(){
+    int k=0;
+    for (int i = 0; i < 8; i++){
+        for (int j = 0; j < 4; j ++){
+            expansion [i * 6 + j + 1] = rightB[k++];
+        }
+    }
+    expansion[0] = rightB[47];
+    expansion[47] = rightB[0];
+
+    for (int i = 6,j = 3; i < 43; i = i + 6, j = j + 4){
+        expansion[i] = rightB[j];
+    }
+
+    for (int i = 5,j = 4; i < 42; i = i + 6, j = j + 4){
+        expansion[i] = rightB[j];
+    }
+}
+
+void IP_Function(){
+    int counter=0;
+    for (int i = 57; i < 64; i = i+2){
+        for (int k = i; k> 0; k -= 8){
+            IP[counter++] = block[k];
         }
     }
 
-    for (int i = 56; i < 63; i = i+2)
-    {
-        for (int k = i; k>= 0; k -= 8)
-        {
-            IP[count_++] = block[k];
+    for (int i = 56; i < 63; i = i+2){
+        for (int k = i; k>= 0; k -= 8){
+            IP[counter++] = block[k];
         }
     }
 }
@@ -61,15 +75,41 @@ int main()
         for (int j = 0; j < 64; j++){
             block[j] = AllBits[i * 64 + j];
         }
-        IP_Function();
-        for (int j = 0; j < 64; j++){
-            AllEncryptedBits[i * 64 + j] = IP[j];
-        }
     }
 
+    IP_Function();
+    cout << endl;
+    for (int m = 0; m<32; m++){
+        leftB[m] = IP[m];
+    }
+
+    for (int m = 0; m<32; m++){
+        rightB[m] = IP[m + 32];
+    }
+    cout << "Left: ";
+    for (int m = 0; m<32; m++){
+        cout << leftB[m];
+    }
+    cout << endl;
+    cout << "Right: ";
+    for (int m = 0; m<32; m++){
+        cout << rightB[m];
+    }
+    cout << endl;
+
+    Expansion_Function();
+
+    cout << "Left: ";
+    for (int m = 0; m<48; m++){
+        cout << expansion[m];
+    }
+    cout << endl;
+
+
+    /*
     for (int i =0; i <size_; i++){
         cout << AllBits[i] << "\t" << AllEncryptedBits[i] << endl;
     }
-    cout << endl;
+    */
     return 0;
 }
