@@ -4,7 +4,14 @@
 
 using namespace std;
 
-int block[64], IP[64], leftB[32], rightB[32], expansion[48];
+int block[64], IP[64], leftB[32], rightB[32], expansion[48], xor1[48],rKeys[16][48];
+
+void XOR1_Expansion_Function(int round){
+    for(int i=0; i<48; i++){
+        xor1[i] = expansion[i]^rKeys[round-1][i];
+
+    }
+}
 
 void Expansion_Function(){
     int k=0;
@@ -42,7 +49,6 @@ void IP_Function(){
 
 int main()
 {
-    int rKeys [16][48];
     string Key = "abcdefg";
     KeyGen(rKeys,Key);
     cout << "All Sub Keys: " << endl;
@@ -99,12 +105,18 @@ int main()
 
     Expansion_Function();
 
-    cout << "Left: ";
+    cout << "Expanded: ";
     for (int m = 0; m<48; m++){
         cout << expansion[m];
     }
     cout << endl;
 
+    cout << "XORed: ";
+    XOR1_Expansion_Function(1);
+    for (int m = 0; m<48; m++){
+        cout << xor1[m];
+    }
+    cout << endl;
 
     /*
     for (int i =0; i <size_; i++){
