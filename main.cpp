@@ -9,7 +9,7 @@ int block[64], IP[64], leftB[32], rightB[32], expansion[48], xor1[48],rKeys[16][
 void XOR1_Expansion_Function(int round){
     for(int i=0; i<48; i++){
         xor1[i] = expansion[i]^rKeys[round-1][i];
-
+    printfasd;
     }
 }
 
