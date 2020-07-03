@@ -31,5 +31,5 @@
 *.out
 *.app
 
-# VSC files
+# VS Code Folders
 *.vscode
