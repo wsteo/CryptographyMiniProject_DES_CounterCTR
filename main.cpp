@@ -349,13 +349,21 @@ int main()
     cout << endl;
 
     int w = 0;
-    for (int i = 0; i< 32; i++) block[w++] = rightB[i];
-    for (int i = 0; i< 32; i++) block[w++] = leftB[i];
+    for (int i = 0; i< 32; i++){
+        block[w++] = rightB[i];
+    }
+    for (int i = 0; i< 32; i++){
+        block[w++] = leftB[i];
+    }
 
     InverseIP();
-    for (int m = 0; m< 64; m++) cout << block[m];
+    for (int m = 0; m< 64; m++){
+        cout << block[m];
+    }
     cout << endl;
-    for (int m = 0; m< 64; m++) cout << finalBlock[m];
+    for (int m = 0; m< 64; m++){
+        cout << block[m];
+    }
     cout << endl;
 
     /*
