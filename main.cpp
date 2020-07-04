@@ -43,13 +43,34 @@ void EncryptCounter(string output){
 }
 
 void XOR(int AllBits[],int AllBits2[]){
-    for(int i=0;i<64;i++){
+    for(int i=0;i<size_;i++){
         xor3[i]=AllBits[i]^AllBits2[i];
     }
 }
+
+string converttochar(int xor3[]){
+    string AllEncryptedChars;
+    for (int i = 0; i < size_/8; i++){
+        int val = 0;
+        for (int j = 0;j <8; j++){
+            val += xor3[i * 8 + j] * pow(2, j);
+        }
+        AllEncryptedChars.push_back(char(val));
+    }
+    return AllEncryptedChars;
+}
 int main()
 {
-    int counter = 1;
+        KeyGen();
+    cout << "All Sub Keys: " << endl;
+    PrintAllSubKeys (rKeys);
+    string str;
+    cin >> str;
+
+    plaintext(str);
+    int counter;
+    counter=1;
+
 
     stringstream ss;
     ss << counter;
@@ -57,14 +78,9 @@ int main()
     ss >> ctr;
 
     //string Key = "abcdefgh";
-    KeyGen();
-    cout << "All Sub Keys: " << endl;
-    PrintAllSubKeys (rKeys);
 
-    string str;
-    cin >> str;
 
-    plaintext(str);
+
 
     for(int i=0;i<size_;i++){
         plain[i]=AllBits[i];
@@ -96,9 +112,14 @@ int main()
 
     XOR(plain,cctr);
     cout<<"\nCipher Text: " <<endl;
-    for(int i=0;i<64;i++){
+    for(int i=0;i<size_;i++){
         cout<<xor3[i];
     }
+    cout<<endl;
+
+    cout<<converttochar(xor3);
+
+
 
     //cout << "Cipher Text: " << cipherText << endl;
     //string plainText = Decryption(cipherText);
