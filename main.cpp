@@ -47,14 +47,10 @@ void XOR(int AllBits[],int AllBits2[]){
         xor3[i]=AllBits[i]^AllBits2[i];
     }
 }
+
 int main()
 {
     int counter = 1;
-
-    stringstream ss;
-    ss << counter;
-    string ctr;
-    ss >> ctr;
 
     //string Key = "abcdefgh";
     KeyGen();
@@ -63,45 +59,54 @@ int main()
 
     string str;
     cin >> str;
+    int stringSize = ceil(str.length() / 8.0) * 8 * 8;
 
-    plaintext(str);
+    for (int i = 0; i < stringSize; i = i + 64){
+        cout<<"\n\nCounter:"<< counter;
 
-    for(int i=0;i<size_;i++){
-        plain[i]=AllBits[i];
-        //cout<<AllBits[i];
-    }
-    cout<<endl;
+        stringstream ss;
+        ss << counter;
+        string ctr;
+        ss >> ctr;
 
-    string output = Encryption(ctr);
-    EncryptCounter(output);
+        plaintext(str);
 
-    for(int i=0;i<size2;i++){
-        cctr[i]=AllBits2[i];
-        //cout<<AllBits2[i];
-    }
-    cout<<endl;
+        for(int i=0;i<size_;i++){
+            plain[i]=AllBits[i];
+            //cout<<AllBits[i];
+        }
+        cout<<endl;
 
-    cout <<"Plain Text: "<<endl;
+        string output = Encryption(ctr);
+        EncryptCounter(output);
 
-    for(int i=0;i<size_;i++){
-        cout<<plain[i];
-    }
+        for(int i=0;i<size2;i++){
+            cctr[i]=AllBits2[i];
+            //cout<<AllBits2[i];
+        }
+        cout<<endl;
 
-    cout <<"\nEncrypted Counter: "<<endl;
-    for(int i=0;i<size2;i++){
-        cout<<cctr[i];
-    }
+        cout <<"Plain Text: "<<endl;
 
-    XOR(plain,cctr);
-    cout<<"\nCipher Text: " <<endl;
-    for(int i=0;i<64;i++){
-        cout<<xor3[i];
-    }
+        for(int i=0;i<size_;i++){
+            cout<<plain[i];
+        }
 
-    for (int i = 0; i < size_; i = i + 64){
-        cout<<"\nCounter:"<< counter<<endl;
+        cout <<"\nEncrypted Counter: ";
+        for(int i=0;i<size2;i++){
+            cout<<cctr[i];
+        }
+
+        XOR(plain,cctr);
+        cout<<"\nCipher Text: ";
+        for(int i=0;i<64;i++){
+            cout<<xor3[i];
+        }
+
         counter++;
     }
+
+
     //cout << "Cipher Text: " << cipherText << endl;
     //string plainText = Decryption(cipherText);
     //cout << "Plain Text: " << plainText << endl;

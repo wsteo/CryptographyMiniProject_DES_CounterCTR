@@ -389,12 +389,12 @@ string Encryption(string PlainText){
             AllEncryptedBits[m++] = finalBlock[i];
         }
     }
-
+/*
     for(int i=0;i<size_;i++){
         cout << AllEncryptedBits[i];
     }
     cout << endl;
-
+*/
     string AllEncryptedChars;
     for (int i = 0; i < size_/8; i++){
         int val = 0;
