@@ -6,6 +6,8 @@
 
 using namespace std;
 
+int rKeys[16][48];
+
 void FindBitsInKey (string KeyC, int Key[64]) {
     // Iterate on KeyC
     int j = 0;
@@ -135,7 +137,7 @@ void PrintAllSubKeys (int rks[16][48]) {
     cout << endl;
 }
 
-void KeyGen (int rKeys[16][48], string Key) {
+void KeyGen (string Key) {
     int roundNo = 16;
     //string Key = "abcdefgh";
     int KeyBits [64] = {0};
