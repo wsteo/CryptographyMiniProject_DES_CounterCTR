@@ -41,14 +41,11 @@ int main()
     cout << "Converted bits from counter: ";
     cout << ctrEncryptedOutput <<endl;
 
-
     cout << "Converted bits from string: ";
     for(int i=0;i<size_;i++){
         cout<<AllBits[i];
     }
     cout<<endl;
-
-
 
     //string cipherText = XOR(str,output);
     //cout << "Cipher Text: " << cipherText << endl;
