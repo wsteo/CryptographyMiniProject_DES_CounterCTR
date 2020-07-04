@@ -3,7 +3,7 @@
 #include <iostream>
 
 int size_,AllBits[64],size2,AllBits2[64],cctr[64],plain[64];
-int xor3[64];
+int xor3[1000];
 
 void plaintext(string PlainText){
     size_ = ceil(PlainText.length() / 8.0) * 8 * 8;
@@ -61,13 +61,7 @@ string converttochar(int xor3[]){
 }
 int main()
 {
-        KeyGen();
-    cout << "All Sub Keys: " << endl;
-    PrintAllSubKeys (rKeys);
-    string str;
-    cin >> str;
 
-    plaintext(str);
     int counter;
     counter=1;
 
@@ -79,7 +73,13 @@ int main()
 
     //string Key = "abcdefgh";
 
+  KeyGen();
+    cout << "All Sub Keys: " << endl;
+    PrintAllSubKeys (rKeys);
+    string str;
+    cin >> str;
 
+    plaintext(str);
 
 
     for(int i=0;i<size_;i++){
@@ -91,6 +91,11 @@ int main()
     string output = Encryption(ctr);
     EncryptCounter(output);
     cout << output <<endl;
+
+    for (int i = 0; i < size_; i = i + 64){
+    cout<<"\nCounter:"<< counter<<endl;
+    counter++;
+}
 
     for(int i=0;i<size2;i++){
         cctr[i]=AllBits2[i];
