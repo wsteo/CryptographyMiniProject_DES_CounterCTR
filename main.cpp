@@ -74,7 +74,6 @@ int main()
 
     string output = Encryption(ctr);
     EncryptCounter(output);
-    cout << output <<endl;
 
     for(int i=0;i<size2;i++){
         cctr[i]=AllBits2[i];
@@ -89,8 +88,7 @@ int main()
     }
 
     cout <<"\nEncrypted Counter: "<<endl;
-
-    for(int i=0;i<size_;i++){
+    for(int i=0;i<size2;i++){
         cout<<cctr[i];
     }
 
@@ -100,6 +98,10 @@ int main()
         cout<<xor3[i];
     }
 
+    for (int i = 0; i < size_; i = i + 64){
+        cout<<"\nCounter:"<< counter<<endl;
+        counter++;
+    }
     //cout << "Cipher Text: " << cipherText << endl;
     //string plainText = Decryption(cipherText);
     //cout << "Plain Text: " << plainText << endl;
