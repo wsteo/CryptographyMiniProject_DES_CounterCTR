@@ -1,4 +1,5 @@
 #include "Decryption.h"
+#include <string>
 
 int main()
 {
@@ -9,12 +10,17 @@ int main()
 
     string str;
     cin >> str;
+    cout << str.length();
 
-    string cipherText = Encryption(str);
-    cout << "Cipher Text: " << cipherText << endl;
+    for (int i=0;i<10;i++){
+        string cipherText = Encryption(str);
+        cout << "Cipher Text: " << cipherText << endl;
 
-    string plainText = Decryption(cipherText);
-    cout << "Plain Text: " << plainText << endl;
+        string plainText = Decryption(cipherText);
+        cout << "Plain Text: " << plainText << endl;
+
+    }
+
 
     return 0;
 }

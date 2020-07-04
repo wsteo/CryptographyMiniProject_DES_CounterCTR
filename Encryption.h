@@ -389,8 +389,9 @@ string Encryption(string PlainText){
         }
     }
 
+    cout << "EncryptedBits: ";
     for(int i=0;i<size_;i++){
-        cout << AllEncryptedBits[i];
+        cout <<AllEncryptedBits[i];
     }
     cout << endl;
 
