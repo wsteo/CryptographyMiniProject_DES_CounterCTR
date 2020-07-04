@@ -149,9 +149,9 @@ void PrintAllSubKeys (int rks[16][48]) {
     cout << endl;
 }
 
-void KeyGen () {
+void KeyGen (string Key) {
     int roundNo = 16;
-    string Key = "abcdefgh";
+    //string Key = "abcdefgh";
     int KeyBits [64] = {0};
     FindBitsInKey(Key, KeyBits);
     cout << "64-bit Key: ";

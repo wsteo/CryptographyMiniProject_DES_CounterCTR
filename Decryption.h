@@ -46,7 +46,7 @@ string Decryption(string CipherText){
         for (int m = 0; m<32; m++){
             rightB[m] = IP[m + 32];
         }
-
+        /*
         cout << "Left: \t";
         for (int m = 0; m<32; m++){
             cout << leftB[m];
@@ -56,10 +56,9 @@ string Decryption(string CipherText){
         for (int m = 0; m<32; m++){
             cout << rightB[m];
         }
-
+        */
         //Start for the ROUND
         for (int round = 1; round < 17; round++){
-        cout<< "\nRound: " << round;
 
         //Expansion
             Expansion_Function();
@@ -81,8 +80,6 @@ string Decryption(string CipherText){
             for(int i=0;i<32;i++){
                 rightB[i]=temp_rightB[i];
             }
-            cout<<"\nAfter Round: "<< round;
-            PrintDebug();
         }
         //end of round funtion
 
@@ -97,7 +94,7 @@ string Decryption(string CipherText){
 
     //Inverse Initial Permutation
         InverseIP();
-
+        /*
         cout<<"\nInverse Initial Permutation\n";
         for (int m = 0; m< 64; m++){
             cout << block[m];
@@ -108,7 +105,7 @@ string Decryption(string CipherText){
             cout << finalBlock[m];
         }
         cout << endl;
-
+        */
         for (int i=0; i<64; i++){
             AllDecryptedBits[m++] = finalBlock[i];
         }
