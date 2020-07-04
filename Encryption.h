@@ -7,6 +7,63 @@ using namespace std;
 int block[64], IP[64], leftB[32], rightB[32], expansion[48], xor1[48];
 int sub[32],perm[32],temp_rightB[32],finalBlock[64];;
 
+void PrintDebug(){
+    cout << "\n---PRINT DEBUG---" <<endl;
+    cout << "Left: \t";
+    for (int m = 0; m<32; m++){
+        cout << leftB[m];
+    }
+    cout << endl;
+    cout << "Right: \t";
+    for (int m = 0; m<32; m++){
+        cout << rightB[m];
+    }
+    cout << endl;
+    cout << "Expanded: ";
+    for (int m = 0; m<48; m++){
+        cout << expansion[m];
+    }
+    cout << endl;
+
+    cout << "XORed\t: ";
+    for (int m = 0; m<48; m++){
+        cout << xor1[m];
+    }
+    cout << endl;
+
+    cout << "Substitution: \t";
+    for (int m = 0; m<32; m++){
+        cout << sub[m];
+    }
+    cout << endl;
+
+    cout << "Permutation: \t";
+    for (int m = 0; m<32; m++){
+        cout << perm[m];
+    }
+    cout << endl;
+
+    cout << "XOR after Permutation: ";
+    for (int m = 0; m<32; m++){
+        cout << temp_rightB[m];
+    }
+
+    //left block same with right block before function
+    cout << "\nLeft Block: ";
+    for (int m = 0; m<32; m++){
+        cout << leftB[m];
+    }
+    cout << endl;
+
+    //xor after permutation
+    cout << "Right Block: ";
+    for (int m = 0; m<32; m++){
+        cout << rightB[m];
+    }
+    cout << endl;
+    cout <<"\n---End---"<< endl;
+}
+
 void XOR_1_Encryption_Function(int round){
     for(int i=0; i<48; i++){
         xor1[i] = expansion[i]^rKeys[round-1][i];
@@ -251,9 +308,10 @@ string Encryption(string PlainText){
         }
     }
 
+    /*
     for (int i = size_ - 1; i >= 0; i--){
         cout << AllBits[i];
-    }
+    }*/
 
     int AllEncryptedBits[size_];
     int m = 0;
@@ -263,8 +321,8 @@ string Encryption(string PlainText){
         }
     }
 
+    //Initial Permutation Function
     IP_Function();
-    cout << endl;
 
     //Divide into 2 sub blocks, left and right
     for (int m = 0; m<32; m++){
@@ -272,61 +330,28 @@ string Encryption(string PlainText){
     }
 
     for (int m = 0; m<32; m++){
-           rightB[m] = IP[m + 32];
+        rightB[m] = IP[m + 32];
     }
-    cout << "Left: ";
-    for (int m = 0; m<32; m++){
-        cout << leftB[m];
-    }
-    cout << endl;
-    cout << "Right: ";
-    for (int m = 0; m<32; m++){
-        cout << rightB[m];
-    }
-    cout << endl;
 
-    //Initial Permutation Function
+    PrintDebug();
+
+    //Start for the ROUND
     for (int round = 1; round < 17; round++){
-        cout<< "Round: " << round <<endl;
+        cout<< "\nRound: " << round;
 
         //Expansion
         Expansion_Function();
 
-        cout << "Expanded: ";
-        for (int m = 0; m<48; m++){
-            cout << expansion[m];
-        }
-        cout << endl;
-
         //XOR operation
-        cout << "XORed: ";
-        XOR_1_Encryption_Function(1);
-        for (int m = 0; m<48; m++){
-            cout << xor1[m];
-        }
-        cout << endl;
+        XOR_1_Encryption_Function(round);
 
         //Substitution
-        cout << "Substitution: ";
         Substitute();
-        for (int m = 0; m<32; m++){
-            cout << sub[m];
-        }
-        cout << endl;
 
-        cout << "Permutation: ";
+        //Permutation
         Perm();
-        for (int m = 0; m<32; m++){
-            cout << perm[m];
-        }
-        cout << endl;
 
-        cout << "XOR after Permutation: ";
         XOR2_Permutation_Function();
-        for (int m = 0; m<32; m++){
-            cout << temp_rightB[m];
-        }
-        cout << endl;
 
         for(int i=0;i<32;i++){
             leftB[i]=rightB[i];
@@ -334,22 +359,10 @@ string Encryption(string PlainText){
         for(int i=0;i<32;i++){
             rightB[i]=temp_rightB[i];
         }
+        cout<<"\nAfter Round: "<< round;
+        PrintDebug();
     }
     //end of round funtion
-
-    //left block same with right block before function
-    cout << "Left Block: ";
-    for (int m = 0; m<32; m++){
-        cout << leftB[m];
-    }
-    cout << endl;
-
-    //xor after permutation
-    cout << "Right Block: ";
-    for (int m = 0; m<32; m++){
-        cout << rightB[m];
-    }
-    cout << endl;
 
     //swapping operation
     int w = 0;
@@ -362,6 +375,8 @@ string Encryption(string PlainText){
 
     //Inverse Initial Permutation
     InverseIP();
+
+    cout<<"\nInverse Initial Permutation\n";
     for (int m = 0; m< 64; m++){
         cout << block[m];
     }
