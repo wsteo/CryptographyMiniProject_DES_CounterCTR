@@ -1,7 +1,25 @@
 #include "Decryption.h"
 #include <sstream>
 #include <iostream>
+int size_,AllBits[64];
+void plaintext(string PlainText){
+    size_ = ceil(PlainText.length() / 8.0) * 8 * 8;
+    AllBits [size_];
+    for (int i = 0; i<size_; i++){
+        AllBits[i]=0;
+    }
 
+    int k = 0;
+    for (int i = 0; i < PlainText.length(); i++) {
+        int n = PlainText[i];
+        for(int j = 0 ; j < 8; j++) {
+            AllBits[k++] = n % 2;
+            n = n / 2;
+        }
+    }
+
+
+}
 
 int main()
 {
@@ -20,11 +38,20 @@ int main()
     string str;
     cin >> str;
 
-    string cipherText = Encryption(ctr);
-    cout << "Cipher Text: " << cipherText << endl;
+    plaintext(str);
 
-    string plainText = Decryption(cipherText);
-    cout << "Plain Text: " << plainText << endl;
+    for(int i=0;i<size_;i++){
+        cout<<AllBits[i];
+    }
+    cout<<endl;
+
+    string output = Encryption(ctr);
+
+    //string cipherText = XOR(str,output);
+   // cout << "Cipher Text: " << cipherText << endl;
+
+    //string plainText = Decryption(cipherText);
+    //cout << "Plain Text: " << plainText << endl;
 
     return 0;
 }
