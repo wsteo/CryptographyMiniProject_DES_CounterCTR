@@ -5,7 +5,7 @@
 using namespace std;
 
 int block[64], IP[64], leftB[32], rightB[32], expansion[48], xor1[48];
-int sub[32],perm[32],temp_rightB[32],finalBlock[64];;
+int sub[32],perm[32],temp_rightB[32],finalBlock[64];
 
 void PrintDebug(){
     cout << "\n---PRINT DEBUG---" <<endl;
@@ -388,12 +388,12 @@ string Encryption(string PlainText){
             AllEncryptedBits[m++] = finalBlock[i];
         }
     }
-    /*
+
     for(int i=0;i<size_;i++){
         cout << AllEncryptedBits[i];
     }
     cout << endl;
-    */
+
     string AllEncryptedChars;
     for (int i = 0; i < size_/8; i++){
         int val = 0;

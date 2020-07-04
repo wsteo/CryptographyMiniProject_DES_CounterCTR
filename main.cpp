@@ -11,7 +11,7 @@ void PlainTextToBits(string PlainText){
 
     int k = 0;
     for (int i = 0; i < PlainText.length(); i++) {
-        int n = PlainText[i];
+        int n = (unsigned char)PlainText[i];
         for(int j = 0 ; j < 8; j++) {
             AllBits[k++] = n % 2;
             n = n / 2;
@@ -34,12 +34,14 @@ int main()
 
     string str;
     cin >> str;
-
     PlainTextToBits(str);
 
     string ctrEncryptedOutput = Encryption(ctr);
     cout << "Converted bits from counter: ";
     cout << ctrEncryptedOutput <<endl;
+
+    cout << ctrEncryptedOutput[1]<<endl;
+    PlainTextToBits(ctrEncryptedOutput);
 
     cout << "Converted bits from string: ";
     for(int i=0;i<size_;i++){
