@@ -5,7 +5,7 @@
 using namespace std;
 
 int block[64], IP[64], leftB[32], rightB[32], expansion[48], xor1[48],rKeys[16][48];
-int sub[32],perm[32],temp_rightB[32];
+int sub[32],perm[32],temp_rightB[32],finalBlock[64];;
 
 void XOR1_Expansion_Function(int round){
     for(int i=0; i<48; i++){
@@ -154,6 +154,34 @@ void Expansion_Function(){
     for (int i = 5,j = 4; i < 42; i = i + 6, j = j + 4){
         expansion[i] = rightB[j];
     }
+}
+
+void InverseIP () {
+    for(int i=0, j=39; i<64; i+=8, j--){
+        finalBlock[i]= block[j];
+    }
+    for(int i=1, j=7; i<64; i+= 8, j--){
+        finalBlock[i]= block[j];
+    }
+    for(int i=2, j=47; i<64; i+= 8, j--){
+        finalBlock[i]= block[j];
+    }
+    for(int i=3, j=15; i<64; i+= 8, j--){
+        finalBlock[i]= block[j];
+    }
+    for(int i=4, j=55; i<64; i+= 8, j--){
+    finalBlock[i]= block[j];
+    }
+    for(int i=5, j=23; i<64; i+= 8, j--){
+    finalBlock[i]= block[j];
+    }
+    for(int i=6, j=63; i<64; i+= 8, j--){
+    finalBlock[i]= block[j];
+    }
+    for(int i=7, j=31; i<64; i+= 8, j--){
+        finalBlock[i]= block[j];
+    }
+
 }
 
 void Perm(){
@@ -320,7 +348,15 @@ int main()
     }
     cout << endl;
 
+    int w = 0;
+    for (int i = 0; i< 32; i++) block[w++] = rightB[i];
+    for (int i = 0; i< 32; i++) block[w++] = leftB[i];
 
+    InverseIP();
+    for (int m = 0; m< 64; m++) cout << block[m];
+    cout << endl;
+    for (int m = 0; m< 64; m++) cout << finalBlock[m];
+    cout << endl;
 
     /*
     for (int i =0; i <size_; i++){
