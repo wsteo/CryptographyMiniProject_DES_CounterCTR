@@ -22,9 +22,10 @@ string Decryption(string CipherText){
         }
     }
 
+    /*
     for (int i = size_ - 1; i >= 0; i--){
         cout << AllBits[i];
-    }
+    }*/
 
     int AllDecryptedBits[size_];
     int m = 0;
@@ -32,70 +33,91 @@ string Decryption(string CipherText){
         for (int j = 0; j < 64; j++){
             block[j] = AllBits[i * 64 + j];
         }
-    }
 
-    IP_Function();
-    cout << endl;
 
-    //Divide into 2 sub blocks, left and right
-    for (int m = 0; m<32; m++){
-        leftB[m] = IP[m];
-    }
+        //Initial Permutation Function
+        IP_Function();
 
-    for (int m = 0; m<32; m++){
-           rightB[m] = IP[m + 32];
-    }
+        //Divide into 2 sub blocks, left and right
+        for (int m = 0; m<32; m++){
+            leftB[m] = IP[m];
+        }
 
-    cout << endl;
+        for (int m = 0; m<32; m++){
+            rightB[m] = IP[m + 32];
+        }
 
-    //Initial Permutation Function
-    for (int round = 1; round < 17; round++){
+        cout << "Left: \t";
+        for (int m = 0; m<32; m++){
+            cout << leftB[m];
+        }
+        cout << endl;
+        cout << "Right: \t";
+        for (int m = 0; m<32; m++){
+            cout << rightB[m];
+        }
+
+        //Start for the ROUND
+        for (int round = 1; round < 17; round++){
+        cout<< "\nRound: " << round;
+
         //Expansion
-        Expansion_Function();
+            Expansion_Function();
 
         //XOR operation
-        XOR_1_Decryption_Function(round);
+            XOR_1_Decryption_Function(round);
 
         //Substitution
-        Substitute();
+            Substitute();
 
-        Perm();
+        //Permutation
+            Perm();
 
-        XOR2_Permutation_Function();
+            XOR2_Permutation_Function();
 
-
-        for(int i=0;i<32;i++){
-            leftB[i]=rightB[i];
+            for(int i=0;i<32;i++){
+                leftB[i]=rightB[i];
+            }
+            for(int i=0;i<32;i++){
+                rightB[i]=temp_rightB[i];
+            }
+            cout<<"\nAfter Round: "<< round;
+            PrintDebug();
         }
-        for(int i=0;i<32;i++){
-            rightB[i]=temp_rightB[i];
+        //end of round funtion
+
+        //swapping operation
+        int w = 0;
+        for (int i = 0; i< 32; i++){
+            block[w++] = rightB[i];
         }
-    }
-    //end of round funtion
-
-    //xor after permutation
-
-    //swapping operation
-    int w = 0;
-    for (int i = 0; i< 32; i++){
-        block[w++] = rightB[i];
-    }
-    for (int i = 0; i< 32; i++){
-        block[w++] = leftB[i];
-    }
+        for (int i = 0; i< 32; i++){
+            block[w++] = leftB[i];
+        }
 
     //Inverse Initial Permutation
-    InverseIP();
+        InverseIP();
 
-    cout << endl;
-    for (int m = 0; m< 64; m++){
-        cout << finalBlock[m];
+        cout<<"\nInverse Initial Permutation\n";
+        for (int m = 0; m< 64; m++){
+            cout << block[m];
+        }
+        cout << endl;
+
+        for (int m = 0; m< 64; m++){
+            cout << finalBlock[m];
+        }
+        cout << endl;
+
+        for (int i=0; i<64; i++){
+            AllDecryptedBits[m++] = finalBlock[i];
+        }
+    }
+
+    for(int i=0;i<size_;i++){
+        cout << AllDecryptedBits[i];
     }
     cout << endl;
-
-    for (int i=0; i<64; i++){
-        AllDecryptedBits[m++] = finalBlock[i];
-    }
 
     string AllDecryptedChars;
     for (int i = 0; i < size_/8; i++){
