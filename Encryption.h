@@ -9,15 +9,6 @@ int sub[32],perm[32],temp_rightB[32],finalBlock[64];;
 
 void PrintDebug(){
     cout << "\n---PRINT DEBUG---" <<endl;
-    cout << "Left: \t";
-    for (int m = 0; m<32; m++){
-        cout << leftB[m];
-    }
-    cout << endl;
-    cout << "Right: \t";
-    for (int m = 0; m<32; m++){
-        cout << rightB[m];
-    }
     cout << endl;
     cout << "Expanded: ";
     for (int m = 0; m<48; m++){
@@ -333,7 +324,15 @@ string Encryption(string PlainText){
         rightB[m] = IP[m + 32];
     }
 
-    PrintDebug();
+    cout << "Left: \t";
+    for (int m = 0; m<32; m++){
+        cout << leftB[m];
+    }
+    cout << endl;
+    cout << "Right: \t";
+    for (int m = 0; m<32; m++){
+        cout << rightB[m];
+    }
 
     //Start for the ROUND
     for (int round = 1; round < 17; round++){
