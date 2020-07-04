@@ -82,16 +82,25 @@ int main()
     }
     cout<<endl;
 
-   // string cipherText =
+    cout <<"Plain Text: "<<endl;
+
+    for(int i=0;i<size_;i++){
+        cout<<plain[i];
+    }
+
+    cout <<"\nEncrypted Counter: "<<endl;
+
+    for(int i=0;i<size_;i++){
+        cout<<cctr[i];
+    }
+
     XOR(plain,cctr);
-    cout<<"Cipher Text: " <<endl;
+    cout<<"\nCipher Text: " <<endl;
     for(int i=0;i<64;i++){
         cout<<xor3[i];
     }
 
-
-//    cout << "Cipher Text: " << cipherText << endl;
-
+    //cout << "Cipher Text: " << cipherText << endl;
     //string plainText = Decryption(cipherText);
     //cout << "Plain Text: " << plainText << endl;
 
