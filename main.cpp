@@ -4,6 +4,7 @@
 
 int size_,AllBits[64],size2,AllBits2[64],cctr[64],plain[64];
 int xor3[64];
+int counter = 1;
 
 void plaintext(string PlainText){
     size_ = ceil(PlainText.length() / 8.0) * 8 * 8;
@@ -40,26 +41,20 @@ void EncryptCounter(string output){
 
 }
 
-int valuetest = 0;
 void XOR(int AllBits[],int AllBits2[]){
     for(int i=0;i<64;i++){
-        xor3[i]=AllBits[valuetest]^AllBits2[i];
-        valuetest++;
+        xor3[i]=AllBits[i*counter]^AllBits2[i];
     }
 }
 
 void XORintoComplete(int xorFunction[], int encryptedText[]){
+
     for (int i = 0; i<size_; i++){
         encryptedText[i]=0;
     }
 
-    for(int i=0;i<64;i++){
-        for (int j = 0; j < 64; j++){
-        encryptedText[i * 64 + j]=xorFunction[i];
-        }
-    }
 
-    cout <<"\nEncrypted Text: ";
+    cout << "\nEncrypted Text: ";
     for(int i=0;i<size_;i++){
         cout<<encryptedText[i];
     }
@@ -68,9 +63,6 @@ void XORintoComplete(int xorFunction[], int encryptedText[]){
 
 int main()
 {
-    int counter = 1;
-    int encryptedText[size_];
-
     //string Key = "abcdefgh";
     KeyGen();
     cout << "All Sub Keys: " << endl;
@@ -114,8 +106,8 @@ int main()
 
         cout <<"\nPlain Text (64bit)\t: ";
 
-        for(int i=valuetest;i< 64*counter ;i++){
-            cout<<plain[i];
+        for(int i=0;i< 64 ;i++){
+            cout<<plain[i*counter];
         }
         cout <<"\nEncrypted Counter\t: ";
         for(int i=0;i<size2;i++){
