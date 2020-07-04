@@ -2,7 +2,7 @@
 #include <sstream>
 #include <iostream>
 int size_,AllBits[64];
-void plaintext(string PlainText){
+void PlainTextToBits(string PlainText){
     size_ = ceil(PlainText.length() / 8.0) * 8 * 8;
     AllBits [size_];
     for (int i = 0; i<size_; i++){
@@ -17,8 +17,6 @@ void plaintext(string PlainText){
             n = n / 2;
         }
     }
-
-
 }
 
 int main()
@@ -30,7 +28,6 @@ int main()
     string ctr;
     ss >> ctr;
 
-    //string Key = "abcdefgh";
     KeyGen();
     cout << "All Sub Keys: " << endl;
     PrintAllSubKeys (rKeys);
@@ -38,17 +35,23 @@ int main()
     string str;
     cin >> str;
 
-    plaintext(str);
+    PlainTextToBits(str);
 
+    string ctrEncryptedOutput = Encryption(ctr);
+    cout << "Converted bits from counter: ";
+    cout << ctrEncryptedOutput <<endl;
+
+
+    cout << "Converted bits from string: ";
     for(int i=0;i<size_;i++){
         cout<<AllBits[i];
     }
     cout<<endl;
 
-    string output = Encryption(ctr);
+
 
     //string cipherText = XOR(str,output);
-   // cout << "Cipher Text: " << cipherText << endl;
+    //cout << "Cipher Text: " << cipherText << endl;
 
     //string plainText = Decryption(cipherText);
     //cout << "Plain Text: " << plainText << endl;

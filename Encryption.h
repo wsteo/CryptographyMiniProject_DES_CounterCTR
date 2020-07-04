@@ -311,32 +311,31 @@ string Encryption(string PlainText){
             block[j] = AllBits[i * 64 + j];
         }
 
+        //Initial Permutation Function
+        IP_Function();
 
-    //Initial Permutation Function
-    IP_Function();
+        //Divide into 2 sub blocks, left and right
+        for (int m = 0; m<32; m++){
+            leftB[m] = IP[m];
+        }
 
-    //Divide into 2 sub blocks, left and right
-    for (int m = 0; m<32; m++){
-        leftB[m] = IP[m];
-    }
-
-    for (int m = 0; m<32; m++){
-        rightB[m] = IP[m + 32];
-    }
-
-    cout << "Left: \t";
-    for (int m = 0; m<32; m++){
-        cout << leftB[m];
-    }
-    cout << endl;
-    cout << "Right: \t";
-    for (int m = 0; m<32; m++){
-        cout << rightB[m];
-    }
-
-    //Start for the ROUND
-    for (int round = 1; round < 17; round++){
-        cout<< "\nRound: " << round;
+        for (int m = 0; m<32; m++){
+            rightB[m] = IP[m + 32];
+        }
+        /*
+        cout << "Left: \t";
+        for (int m = 0; m<32; m++){
+            cout << leftB[m];
+        }
+        cout << endl;
+        cout << "Right: \t";
+        for (int m = 0; m<32; m++){
+            cout << rightB[m];
+        }
+        */
+        //Start for the ROUND
+        for (int round = 1; round < 17; round++){
+        //cout<< "\nRound: " << round;
 
         //Expansion
             Expansion_Function();
@@ -358,8 +357,7 @@ string Encryption(string PlainText){
             for(int i=0;i<32;i++){
                 rightB[i]=temp_rightB[i];
             }
-            cout<<"\nAfter Round: "<< round;
-            PrintDebug();
+            //PrintDebug();
         }
         //end of round funtion
 
@@ -374,7 +372,7 @@ string Encryption(string PlainText){
 
     //Inverse Initial Permutation
         InverseIP();
-
+    /*
         cout<<"\nInverse Initial Permutation\n";
         for (int m = 0; m< 64; m++){
             cout << block[m];
@@ -385,17 +383,17 @@ string Encryption(string PlainText){
             cout << finalBlock[m];
         }
         cout << endl;
-
+    */
         for (int i=0; i<64; i++){
             AllEncryptedBits[m++] = finalBlock[i];
         }
     }
-
+    /*
     for(int i=0;i<size_;i++){
         cout << AllEncryptedBits[i];
     }
     cout << endl;
-
+    */
     string AllEncryptedChars;
     for (int i = 0; i < size_/8; i++){
         int val = 0;
