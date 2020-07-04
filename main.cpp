@@ -20,8 +20,6 @@ void plaintext(string PlainText){
             n = n / 2;
         }
     }
-
-
 }
 
 void EncryptCounter(string output){
@@ -47,6 +45,23 @@ void XOR(int AllBits[],int AllBits2[]){
         xor3[i]=AllBits[i]^AllBits2[i];
     }
 }
+
+
+void XORintoComplete(int xorFunction[], int encryptedText[]){
+    for (int i = 0; i<size_; i++){
+        encryptedText[i]=0;
+    }
+
+    for(int i=0;i<64;i++){
+        encryptedText[i]=xorFunction[i];
+    }
+
+    cout <<"\nEncrypted Text: ";
+    for(int i=0;i<size_;i++){
+        cout<<encryptedText[i];
+    }
+}
+
 
 int main()
 {
@@ -102,7 +117,8 @@ int main()
         for(int i=0;i<64;i++){
             cout<<xor3[i];
         }
-
+        int encryptedText[size_];
+        XORintoComplete(xor3,encryptedText);
         counter++;
     }
 
