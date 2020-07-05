@@ -5,7 +5,7 @@
 int size_,AllBits[64],size2,AllBits2[64],cctr[64],plain[64];
 int xor3[64];
 int counter = 1;
-int pl;
+
 void plaintext(string PlainText){
     size_ = ceil(PlainText.length() / 8.0) * 8 * 8;
     AllBits [size_];
@@ -63,6 +63,7 @@ void XORintoComplete(int xorFunction[], int encryptedText[]){
 
 int main()
 {
+    int pl;
     //string Key = "abcdefgh";
     KeyGen();
     cout << "All Sub Keys: " << endl;
@@ -111,7 +112,7 @@ int main()
         }
         cout<<endl;
         pl=pl+64;
-        cout<<pl<<endl;
+        //cout<<pl<<endl;
         cout <<"\nEncrypted Counter\t: ";
         for(int i=0;i<size2;i++){
             cout<<cctr[i];
