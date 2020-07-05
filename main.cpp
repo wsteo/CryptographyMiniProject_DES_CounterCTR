@@ -5,7 +5,7 @@
 int size_,AllBits[64],size2,AllBits2[64],cctr[64],plain[64];
 int xor3[64];
 int counter = 1;
-
+int pl;
 void plaintext(string PlainText){
     size_ = ceil(PlainText.length() / 8.0) * 8 * 8;
     AllBits [size_];
@@ -107,8 +107,11 @@ int main()
         cout <<"\nPlain Text (64bit)\t: ";
 
         for(int i=0;i< 64 ;i++){
-            cout<<plain[i*counter];
+            cout<<plain[i+pl];
         }
+        cout<<endl;
+        pl=pl+64;
+        cout<<pl<<endl;
         cout <<"\nEncrypted Counter\t: ";
         for(int i=0;i<size2;i++){
             cout<<cctr[i];
