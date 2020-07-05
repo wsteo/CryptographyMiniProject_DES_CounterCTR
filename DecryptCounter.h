@@ -1,15 +1,16 @@
 #include "EncryptCounter.h"
-int counterC=counter;
+int counterC=1;
+
 void ciphertext(string CipherText){
     size3 = ceil(CipherText.length() / 8.0) * 8 * 8;
-    AllBitsCipher [size_];
-    for (int i = 0; i<size_; i++){
+    AllBitsCipher [size3];
+    for (int i = 0; i<size3; i++){
         AllBitsCipher[i]=0;
     }
 
     int k = 0;
     for (int i = 0; i < CipherText.length(); i++) {
-        int n = (unsigned char)CipherText[i];
+        int n = (unsigned char) CipherText[i];
         for(int j = 0 ; j < 8; j++) {
             AllBitsCipher[k++] = n % 2;
             n = n / 2;
@@ -34,7 +35,11 @@ void DecryptCounter(string output){
     }
 }
 
-
+void XORDecrypt(int AllBitsCipher[],int AllBits2[]){
+    for(int i=0;i<64;i++){
+        xor4[i]=AllBitsCipher[i*counterC]^AllBits2[i];
+    }
+}
 
 
 string DecryptionCounter(string str){
@@ -45,18 +50,18 @@ string DecryptionCounter(string str){
     int stringSize = ceil(str.length() / 8.0) * 8 * 8;
 
     for (int i = 0; i < stringSize; i = i + 64){
-        cout<<"\n\nCounter:"<< counter;
+        cout<<"\n\nCounter:"<< counterC;
 
         stringstream ss;
         ss << counterC;
         string ctr;
         ss >> ctr;
 
-        plaintext(str);
+        ciphertext(str);
 
 
-        for(int i=0;i<size_;i++){
-            plain[i]=AllBits[i];
+        for(int i=0;i<size3;i++){
+            cipher[i]=AllBitsCipher[i];
             //cout<<AllBits[i];
         }
         cout<<endl;
@@ -70,16 +75,16 @@ string DecryptionCounter(string str){
         }
         cout<<endl;
 
-        cout <<"Plain Text(FULL)\t: ";
+        cout <<"Cipher Text(FULL)\t: ";
 
-        for(int i=0;i<size_;i++){
-            cout<<plain[i];
+        for(int i=0;i<size3;i++){
+            cout<<cipher[i];
         }
 
-        cout <<"\nPlain Text (64bit)\t: ";
+        cout <<"\nCipher Text (64bit)\t: ";
 
         for(int i=0;i< 64 ;i++){
-            cout<<plain[i+pl];
+            cout<<cipher[i+pl];
         }
         cout<<endl;
         pl=pl+64;
@@ -89,11 +94,11 @@ string DecryptionCounter(string str){
             cout<<cctr[i];
         }
 
-        XOR(plain,cctr);
+        XORDecrypt(cipher,cctr);
         cout<<"\nXORTxtCtr\t\t: ";
         for(int i=0;i<64;i++){
-            cout<<xor3[i];
-            DecryptedBit[i+j]=xor3[i];
+            cout<<xor4[i];
+            DecryptedBit[i+j]=xor4[i];
 
             //ssx[i]>>EncryptedBit[i+j];
         }
@@ -102,7 +107,7 @@ string DecryptionCounter(string str){
         j=j+64;
 
         //XORintoComplete(xor3,encryptedText);
-        counterC--;
+        counterC++;
     }
     cout<<"\nDecrypt Bit\t\t: ";
     for(int i=0;i<stringSize;i++){
@@ -111,7 +116,7 @@ string DecryptionCounter(string str){
     cout<<endl;
 
     string AllDecryptedChars;
-    for (int i = 0; i < size_/8; i++){
+    for (int i = 0; i < size3/8; i++){
         int val = 0;
         for (int j = 0;j <8; j++){
             val += DecryptedBit[i * 8 + j] * pow(2, j);

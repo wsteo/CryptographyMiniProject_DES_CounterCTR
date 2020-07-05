@@ -1,9 +1,3 @@
-<<<<<<< Updated upstream
-#include "Decryption.h"
-
-int main()
-{
-=======
 
 #include "DecryptCounter.h"
 
@@ -12,7 +6,7 @@ int main()
 {
 
 
->>>>>>> Stashed changes
+
     //string Key = "abcdefgh";
     KeyGen();
     cout << "All Sub Keys: " << endl;
@@ -20,13 +14,13 @@ int main()
 
     string str;
     cin >> str;
-<<<<<<< Updated upstream
-=======
 
+    cout<<"\n---Encrypt---"<<endl;
     string CipherText=EncryptionCounter(str);
     cout<<"\nCipher Text\t\t: ";
     cout<<CipherText<<endl;
 
+    cout<<"\n---Decrypt---"<<endl;
     string PlainText=DecryptionCounter(CipherText);
     cout<<"\nPlain Text\t\t: ";
     cout<<PlainText<<endl;
@@ -92,13 +86,8 @@ int main()
     cout<<"\nDecrypted Text\t\t: ";
     cout<<AllDecryptedChars<<endl;*/
 
->>>>>>> Stashed changes
 
-    string cipherText = Encryption(str);
-    cout << "Cipher Text: " << cipherText << endl;
 
-    string plainText = Decryption(cipherText);
-    cout << "Plain Text: " << plainText << endl;
 
     return 0;
 }

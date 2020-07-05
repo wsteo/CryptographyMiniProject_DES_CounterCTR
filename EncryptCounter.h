@@ -2,7 +2,7 @@
 #include <sstream>
 #include <iostream>
 int size_,AllBits[64],size2,AllBits2[64],cctr[64],plain[64],size3,cipher[64],AllBitsCipher[64];
-int xor3[64];
+int xor3[64],xor4[64];
 int counter = 1;
 
 void plaintext(string PlainText){
@@ -45,7 +45,7 @@ void XOR(int AllBits[],int AllBits2[]){
     }
 }
 
-void XORintoComplete(int xorFunction[], int encryptedText[]){
+/*void XORintoComplete(int xorFunction[], int encryptedText[]){
 
     for (int i = 0; i<size_; i++){
         encryptedText[i]=0;
@@ -57,7 +57,7 @@ void XORintoComplete(int xorFunction[], int encryptedText[]){
         cout<<encryptedText[i];
     }
 
-}
+}*/
 
 string EncryptionCounter(string str){
     int j=0;
