@@ -32,7 +32,9 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="DecryptCounter.h" />
 		<Unit filename="Decryption.h" />
+		<Unit filename="EncryptCounter.h" />
 		<Unit filename="Encryption.h" />
 		<Unit filename="KeyGenLectureExample.h" />
 		<Unit filename="main.cpp" />
