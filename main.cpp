@@ -62,8 +62,9 @@ void XORintoComplete(int xorFunction[], int encryptedText[]){
 }
 
 int main()
-{
-    int pl;
+{ int j=0;
+    int EncryptedBit[1000];
+    int pl=0;
     //string Key = "abcdefgh";
     KeyGen();
     cout << "All Sub Keys: " << endl;
@@ -122,10 +123,20 @@ int main()
         cout<<"\nCipher Text\t\t: ";
         for(int i=0;i<64;i++){
             cout<<xor3[i];
+            EncryptedBit[i+j]=xor3[i];
+
+            //ssx[i]>>EncryptedBit[i+j];
         }
+        cout<<endl;
+
+        j=j+64;
 
         //XORintoComplete(xor3,encryptedText);
         counter++;
+    }
+    cout<<"\nEncrypt\t\t\t: ";
+    for(int i=0;i<stringSize;i++){
+        cout<<EncryptedBit[i];
     }
 
 
