@@ -4,9 +4,6 @@
 
 int main()
 {
-
-
-
     //string Key = "abcdefgh";
     KeyGen();
     cout << "All Sub Keys: " << endl;
