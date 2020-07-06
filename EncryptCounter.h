@@ -39,13 +39,13 @@ void EncryptCounter(string output){
     }
 }
 
-void XOR(int AllBits[],int AllBits2[]){
+void XOR(int tempBits1[],int tempBits2[]){
     for(int i=0;i<64;i++){
-        xor3[i]=AllBits[i*counter]^AllBits2[i];
+        xor3[i]=tempBits1[i]^tempBits2[i];
     }
 }
 
-/*void XORintoComplete(int xorFunction[], int encryptedText[]){
+void XORintoComplete(int xorFunction[], int encryptedText[]){
 
     for (int i = 0; i<size_; i++){
         encryptedText[i]=0;
@@ -57,12 +57,11 @@ void XOR(int AllBits[],int AllBits2[]){
         cout<<encryptedText[i];
     }
 
-}*/
+}
 
 string EncryptionCounter(string str){
-    int j=0;
-    int EncryptedBit[1000];
-    int pl=0;
+    int pl_ctr=0;
+    int EncryptedBit[2000];
 
     int stringSize = ceil(str.length() / 8.0) * 8 * 8;
 
@@ -76,19 +75,15 @@ string EncryptionCounter(string str){
 
         plaintext(str);
 
-
         for(int i=0;i<size_;i++){
             plain[i]=AllBits[i];
-            //cout<<AllBits[i];
         }
-        cout<<endl;
 
         string output = Encryption(ctr);
         EncryptCounter(output);
 
         for(int i=0;i<size2;i++){
             cctr[i]=AllBits2[i];
-            //cout<<AllBits2[i];
         }
         cout<<endl;
 
@@ -98,36 +93,35 @@ string EncryptionCounter(string str){
             cout<<plain[i];
         }
 
-        cout <<"\nPlain Text (64bit)\t: ";
 
-        for(int i=0;i< 64 ;i++){
-            cout<<plain[i+pl];
+        int tempPlText[64];
+        cout <<"\nPlain Text (64bit)\t: ";
+        for (int location = 0; location < 64; location++){
+            cout << plain[location+(pl_ctr*64)];
+            tempPlText[location] = plain[location+(pl_ctr*64)];
         }
-        cout<<endl;
-        pl=pl+64;
-        //cout<<pl<<endl;
+
         cout <<"\nEncrypted Counter\t: ";
         for(int i=0;i<size2;i++){
             cout<<cctr[i];
         }
 
-        XOR(plain,cctr);
+        XOR(tempPlText,cctr);
+
         cout<<"\nXORTxtCtr\t\t: ";
         for(int i=0;i<64;i++){
             cout<<xor3[i];
-            EncryptedBit[i+j]=xor3[i];
-
-            //ssx[i]>>EncryptedBit[i+j];
+            EncryptedBit[i+(64*pl_ctr)]=xor3[i];
         }
+
         cout<<endl;
 
-        j=j+64;
-
-        //XORintoComplete(xor3,encryptedText);
+        pl_ctr++;
         counter++;
     }
+
     cout<<"\nEncrypt Bit\t\t: ";
-    for(int i=0;i<stringSize;i++){
+    for(int i=0;i<size_;i++){
         cout<<EncryptedBit[i];
     }
     cout<<endl;
