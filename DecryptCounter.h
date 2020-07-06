@@ -86,8 +86,7 @@ string DecryptionCounter(string str){
             cout << cipher[location+(pl_ctr*64)];
             tempPlText[location] = cipher[location+(pl_ctr*64)];
         }
-        cout<<endl;
-        cout<<pl_ctr*64<<endl;
+
         cout <<"\nEncrypted Counter\t: ";
         for(int i=0;i<size2;i++){
             cout<<cctr[i];
