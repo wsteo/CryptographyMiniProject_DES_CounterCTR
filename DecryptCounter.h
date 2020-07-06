@@ -1,5 +1,5 @@
 #include "EncryptCounter.h"
-int counterC=1;
+//int counterC=1;
 
 void ciphertext(string CipherText){
     size3 = ceil(CipherText.length() / 8.0) * 8 * 8;
@@ -41,15 +41,15 @@ void XORDecrypt(int tempBits1[],int tempBits2[]){
     }
 }
 
-
-string DecryptionCounter(string str){
+string DecryptionCounter(string str,int counterC){
     int DecryptedBit[3000];
     int pl_ctr=0;
     int tempPlText[3000];
     int stringSize = ceil(str.length() / 8.0) * 8 * 8;
+    int counterviewC=1;
 
     for (int i = 0; i < stringSize; i = i + 64){
-        cout<<"\n\nCounter:"<< counterC;
+        cout<<"\n\nCounter:"<< counterviewC;
 
         stringstream ss;
         ss << counterC;
@@ -93,15 +93,15 @@ string DecryptionCounter(string str){
         }
 
         XORDecrypt(tempPlText,cctr);
-        cout<<"\nXORTxtCtr\t\t: ";
+        cout<<"\nResult of XOR\t\t: ";
         for(int i=0;i<64;i++){
             cout<<xor4[i];
             DecryptedBit[i+(pl_ctr*64)]=xor4[i];
         }
-        cout<<endl;
 
         pl_ctr++;
         counterC++;
+        counterviewC++;
     }
     cout<<"\nDecrypt Bit\t\t: ";
     for(int i=0;i<stringSize;i++){
