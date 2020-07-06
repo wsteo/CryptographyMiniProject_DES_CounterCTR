@@ -114,10 +114,10 @@ string Decryption(string CipherText){
         }
     }
 
-    for(int i=0;i<size_;i++){
+   /* for(int i=0;i<size_;i++){
         cout << AllDecryptedBits[i];
     }
-    cout << endl;
+    cout << endl;*/
 
     string AllDecryptedChars;
     for (int i = 0; i < size_/8; i++){

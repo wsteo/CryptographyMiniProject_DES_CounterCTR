@@ -1,7 +1,7 @@
 #include "Decryption.h"
 #include <sstream>
 #include <iostream>
-int size_,AllBits[64],size2,AllBits2[64],cctr[64],plain[64],size3,cipher[64],AllBitsCipher[64];
+int size_,AllBits[1000],size2,AllBits2[64],cctr[64],plain[64],size3,cipher[64],AllBitsCipher[1000];
 int xor3[64],xor4[64];
 int counter = 1;
 
@@ -24,7 +24,7 @@ void plaintext(string PlainText){
 
 void EncryptCounter(string output){
     size2 = ceil(output.length() / 8.0) * 8 * 8;
-    AllBits [size2];
+    AllBits2 [size2];
     for (int i = 0; i<size2; i++){
         AllBits2[i]=0;
     }
@@ -61,8 +61,8 @@ void XORintoComplete(int xorFunction[], int encryptedText[]){
 
 string EncryptionCounter(string str){
     int pl_ctr=0;
-    int EncryptedBit[2000];
-
+    int EncryptedBit[3000];
+    int tempPlText[3000];
     int stringSize = ceil(str.length() / 8.0) * 8 * 8;
 
     for (int i = 0; i < stringSize; i = i + 64){
@@ -75,7 +75,7 @@ string EncryptionCounter(string str){
 
         plaintext(str);
 
-        for(int i=0;i<size_;i++){
+        for(int i=0;i<stringSize;i++){
             plain[i]=AllBits[i];
         }
 
@@ -93,8 +93,6 @@ string EncryptionCounter(string str){
             cout<<plain[i];
         }
 
-
-        int tempPlText[64];
         cout <<"\nPlain Text (64bit)\t: ";
         for (int location = 0; location < 64; location++){
             cout << plain[location+(pl_ctr*64)];
@@ -114,7 +112,6 @@ string EncryptionCounter(string str){
             EncryptedBit[i+(64*pl_ctr)]=xor3[i];
         }
 
-        cout<<endl;
 
         pl_ctr++;
         counter++;
@@ -127,7 +124,7 @@ string EncryptionCounter(string str){
     cout<<endl;
 
     string AllEncryptedChars;
-    for (int i = 0; i < size_/8; i++){
+    for (int i = 0; i < stringSize/8; i++){
         int val = 0;
         for (int j = 0;j <8; j++){
             val += EncryptedBit[i * 8 + j] * pow(2, j);
