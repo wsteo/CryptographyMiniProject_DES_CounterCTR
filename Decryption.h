@@ -55,16 +55,16 @@ string Decryption(string CipherText){
         for (int round = 1; round < 17; round++){
             //cout<< "\nRound: " << round;
 
-        //Expansion
+            //Expansion
             Expansion_Function();
 
-        //XOR operation
+            //XOR operation
             XOR_1_Decryption_Function(round);
 
-        //Substitution
+            //Substitution
             Substitute();
 
-        //Permutation
+            //Permutation
             Perm();
 
             XOR2_Permutation_Function();
@@ -89,7 +89,7 @@ string Decryption(string CipherText){
             block[w++] = leftB[i];
         }
 
-    //Inverse Initial Permutation
+        //Inverse Initial Permutation
         InverseIP();
 
         cout<<"\nInverse Initial Permutation\n";
