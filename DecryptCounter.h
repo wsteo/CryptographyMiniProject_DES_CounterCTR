@@ -49,7 +49,7 @@ string DecryptionCounter(string str,int counterC){
     int counterviewC=1;
 
     for (int i = 0; i < stringSize; i = i + 64){
-        cout<<"\n\nCounter:"<< counterviewC;
+        cout<<"\nCounter:"<< counterviewC <<endl;
 
         stringstream ss;
         ss << setw(4) << setfill('0') << counterC%9999;
@@ -57,14 +57,17 @@ string DecryptionCounter(string str,int counterC){
         ss >> ctr;
 
         string nonceAndCtr = nonce + ctr;
-        ciphertext(str);
 
+        cout<<"Nonce\t\t\t: "<<nonce<<endl;
+        cout<<"Counter\t\t\t: "<<ctr<<endl;
+        cout<<"Complete Counter\t: "<<nonceAndCtr<<endl;
+
+        ciphertext(str);
 
         for(int i=0;i<size3;i++){
             cipher[i]=AllBitsCipher[i];
             //cout<<AllBits[i];
         }
-        cout<<endl;
 
         string output = Encryption(nonceAndCtr);
         EncryptCounter(output);
@@ -73,7 +76,6 @@ string DecryptionCounter(string str,int counterC){
             cctr[i]=AllBits2[i];
             //cout<<AllBits2[i];
         }
-        cout<<endl;
 
         cout <<"Cipher Text(FULL)\t: ";
 
@@ -82,7 +84,7 @@ string DecryptionCounter(string str,int counterC){
         }
 
 
-        cout <<"\nCipher Text (64bit)\t: ";
+        cout <<"\nCipher Text Block(64bit): ";
         for (int location = 0; location < 64; location++){
             cout << cipher[location+(pl_ctr*64)];
             tempPlText[location] = cipher[location+(pl_ctr*64)];
@@ -103,6 +105,7 @@ string DecryptionCounter(string str,int counterC){
         pl_ctr++;
         counterC++;
         counterviewC++;
+        cout << endl;
     }
     cout<<"\nDecrypt Bit\t\t: ";
     for(int i=0;i<stringSize;i++){

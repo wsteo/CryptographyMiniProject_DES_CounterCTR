@@ -6,6 +6,7 @@ int main()
     cout << "All Sub Keys: " << endl;
     PrintAllSubKeys (rKeys);
 
+    cout<<"The maximum number you can type here is 9999"<<endl;
     cout<<"Enter Secret Counter (number only)\t\t: ";
     int ctr;
     cin>>ctr;

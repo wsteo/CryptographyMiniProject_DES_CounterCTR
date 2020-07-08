@@ -17,19 +17,13 @@ string randomStringGen(int string_len){
     for (int i=0; i<string_len;i++){
         randomStr[i] = alpha_num[rand() % alpha_num.length()];
     }
-    cout<< "randomStringTest: ";
-    for (int i=0; i<string_len;i++){
-        cout<<randomStr[i];
-    }
     return randomStr;
 }
 
 string GetNonce(int stringLen){
     string nonceValue = randomStringGen(stringLen);
     string temp;
-    cout<< "\nrandomStringTest: ";
     for (int i=0; i<stringLen;i++){
-        cout<<nonceValue[i];
         temp.push_back(nonceValue[i]);
     }
     cout<<endl;
@@ -82,13 +76,10 @@ string EncryptionCounter(string str,int counter){
     int tempPlText[3000];
     int stringSize = ceil(str.length() / 8.0) * 8 * 8;
     int counterview = 1;
-
     nonce = GetNonce(4);
-    cout << nonce;
-
 
     for (int i = 0; i < stringSize; i = i + 64){
-        cout<<"\n\nCounter:"<< counterview <<endl;
+        cout<<"Counter:"<< counterview <<endl;
 
         stringstream ss;
         ss << setw(4) << setfill('0') <<counter%9999;
@@ -96,8 +87,9 @@ string EncryptionCounter(string str,int counter){
         ss >> ctr;
 
         string nonceAndCtr = nonce + ctr;
-        cout<<ctr<<endl;
-        cout<<nonceAndCtr<<endl;
+        cout<<"Nonce\t\t\t: "<<nonce<<endl;
+        cout<<"Counter\t\t\t: "<<ctr<<endl;
+        cout<<"Complete Counter\t: "<<nonceAndCtr<<endl;
         plaintext(str);
 
         for(int i=0;i<stringSize;i++){
@@ -109,9 +101,8 @@ string EncryptionCounter(string str,int counter){
 
         for(int i=0;i<size2;i++){
             cctr[i]=AllBits2[i];
-            cout << cctr[i];
+            //cout << cctr[i];
         }
-        cout<<endl;
 
         cout <<"Plain Text(FULL)\t: ";
 
@@ -119,7 +110,7 @@ string EncryptionCounter(string str,int counter){
             cout<<plain[i];
         }
 
-        cout <<"\nPlain Text (64bit)\t: ";
+        cout <<"\nPlain Text Block(64bit)\t: ";
         for (int location = 0; location < 64; location++){
             cout << plain[location+(pl_ctr*64)];
             tempPlText[location] = plain[location+(pl_ctr*64)];
@@ -141,6 +132,7 @@ string EncryptionCounter(string str,int counter){
         pl_ctr++;
         counter++;
         counterview++;
+        cout << endl;
     }
 
     cout<<"\nEncrypt Bit\t\t: ";
