@@ -1,5 +1,4 @@
 #include "EncryptCounter.h"
-//int counterC=1;
 
 void ciphertext(string CipherText){
     size3 = ceil(CipherText.length() / 8.0) * 8 * 8;
