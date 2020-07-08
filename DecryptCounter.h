@@ -52,10 +52,11 @@ string DecryptionCounter(string str,int counterC){
         cout<<"\n\nCounter:"<< counterviewC;
 
         stringstream ss;
-        ss << counterC;
+        ss << setw(4) << setfill('0') << counterC%9999;
         string ctr;
         ss >> ctr;
 
+        string nonceAndCtr = nonce + ctr;
         ciphertext(str);
 
 
@@ -65,7 +66,7 @@ string DecryptionCounter(string str,int counterC){
         }
         cout<<endl;
 
-        string output = Encryption(ctr);
+        string output = Encryption(nonceAndCtr);
         EncryptCounter(output);
 
         for(int i=0;i<size2;i++){

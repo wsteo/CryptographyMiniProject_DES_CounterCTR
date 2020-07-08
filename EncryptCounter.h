@@ -1,9 +1,40 @@
 #include "Decryption.h"
 #include <sstream>
 #include <iostream>
+#include <time.h>
+#include <iomanip>
+
 int size_,AllBits[1000],size2,AllBits2[64],cctr[64],plain[64],size3,cipher[64],AllBitsCipher[1000];
 int xor3[64],xor4[64];
 //int counter = 1;
+string nonce;
+
+string randomStringGen(int string_len){
+    string randomStr;
+    //char alpha_num[] = {"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"};
+    string alpha_num = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    srand(time(NULL)); //initialize the random number generator with seed
+    for (int i=0; i<string_len;i++){
+        randomStr[i] = alpha_num[rand() % alpha_num.length()];
+    }
+    cout<< "randomStringTest: ";
+    for (int i=0; i<string_len;i++){
+        cout<<randomStr[i];
+    }
+    return randomStr;
+}
+
+string GetNonce(int stringLen){
+    string nonceValue = randomStringGen(stringLen);
+    string temp;
+    cout<< "\nrandomStringTest: ";
+    for (int i=0; i<stringLen;i++){
+        cout<<nonceValue[i];
+        temp.push_back(nonceValue[i]);
+    }
+    cout<<endl;
+    return temp;
+}
 
 void plaintext(string PlainText){
     size_ = ceil(PlainText.length() / 8.0) * 8 * 8;
@@ -52,25 +83,33 @@ string EncryptionCounter(string str,int counter){
     int stringSize = ceil(str.length() / 8.0) * 8 * 8;
     int counterview = 1;
 
+    nonce = GetNonce(4);
+    cout << nonce;
+
+
     for (int i = 0; i < stringSize; i = i + 64){
-        cout<<"\n\nCounter:"<< counterview;
+        cout<<"\n\nCounter:"<< counterview <<endl;
 
         stringstream ss;
-        ss << counter;
+        ss << setw(4) << setfill('0') <<counter%9999;
         string ctr;
         ss >> ctr;
 
+        string nonceAndCtr = nonce + ctr;
+        cout<<ctr<<endl;
+        cout<<nonceAndCtr<<endl;
         plaintext(str);
 
         for(int i=0;i<stringSize;i++){
             plain[i]=AllBits[i];
         }
 
-        string output = Encryption(ctr);
+        string output = Encryption(nonceAndCtr);
         EncryptCounter(output);
 
         for(int i=0;i<size2;i++){
             cctr[i]=AllBits2[i];
+            cout << cctr[i];
         }
         cout<<endl;
 
