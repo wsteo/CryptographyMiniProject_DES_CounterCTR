@@ -4,7 +4,7 @@ int main()
 {
     string key = "abcdefgh";
     KeyGen(key);
-    cout << "All Sub Keys: " << endl;
+    cout << "\nAll Sub Keys: " << endl;
     PrintAllSubKeys (rKeys);
 
     cout<<"The maximum number you can type here is 9999"<<endl;
