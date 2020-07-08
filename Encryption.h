@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cmath>
-#include "KeyGenLectureExample.h"
+#include "KeyGeneration.h"
 
 using namespace std;
 
