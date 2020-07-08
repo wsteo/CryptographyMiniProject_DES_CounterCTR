@@ -1,10 +1,7 @@
-
 #include "DecryptCounter.h"
-
 
 int main()
 {
-    //string Key = "abcdefgh";
     KeyGen();
     cout << "All Sub Keys: " << endl;
     PrintAllSubKeys (rKeys);
