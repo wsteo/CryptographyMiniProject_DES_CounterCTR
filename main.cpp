@@ -2,7 +2,8 @@
 
 int main()
 {
-    KeyGen();
+    string key = "abcdefgh";
+    KeyGen(key);
     cout << "All Sub Keys: " << endl;
     PrintAllSubKeys (rKeys);
 
