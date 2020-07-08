@@ -22,18 +22,12 @@ string Decryption(string CipherText){
         }
     }
 
-    /*
-    for (int i = size_ - 1; i >= 0; i--){
-        cout << AllBits[i];
-    }*/
-
     int AllDecryptedBits[size_];
     int m = 0;
     for (int i = 0 ; i <size_/64;i++){
         for (int j = 0; j < 64; j++){
             block[j] = AllBits[i * 64 + j];
         }
-
 
         //Initial Permutation Function
         IP_Function();
@@ -59,18 +53,18 @@ string Decryption(string CipherText){
 
         //Start for the ROUND
         for (int round = 1; round < 17; round++){
-        cout<< "\nRound: " << round;
+            //cout<< "\nRound: " << round;
 
-        //Expansion
+            //Expansion
             Expansion_Function();
 
-        //XOR operation
+            //XOR operation
             XOR_1_Decryption_Function(round);
 
-        //Substitution
+            //Substitution
             Substitute();
 
-        //Permutation
+            //Permutation
             Perm();
 
             XOR2_Permutation_Function();
@@ -95,7 +89,7 @@ string Decryption(string CipherText){
             block[w++] = leftB[i];
         }
 
-    //Inverse Initial Permutation
+        //Inverse Initial Permutation
         InverseIP();
 
         cout<<"\nInverse Initial Permutation\n";
@@ -113,11 +107,6 @@ string Decryption(string CipherText){
             AllDecryptedBits[m++] = finalBlock[i];
         }
     }
-
-   /* for(int i=0;i<size_;i++){
-        cout << AllDecryptedBits[i];
-    }
-    cout << endl;*/
 
     string AllDecryptedChars;
     for (int i = 0; i < size_/8; i++){

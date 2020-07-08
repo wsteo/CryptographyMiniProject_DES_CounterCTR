@@ -1,14 +1,13 @@
-
 #include "DecryptCounter.h"
-
 
 int main()
 {
-    //string Key = "abcdefgh";
-    KeyGen();
-    cout << "All Sub Keys: " << endl;
+    string key = "abcdefgh";
+    KeyGen(key);
+    cout << "\nAll Sub Keys: " << endl;
     PrintAllSubKeys (rKeys);
 
+    cout<<"The maximum number you can type here is 9999"<<endl;
     cout<<"Enter Secret Counter (number only)\t\t: ";
     int ctr;
     cin>>ctr;

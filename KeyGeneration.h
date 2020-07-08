@@ -31,25 +31,12 @@ void FindBitsInKey (string KeyC, int Key[64]) {
 void PermChoice1 (int k[64], int kp1[56]) {
     int j = 0;
     for (int i = 56; i >= 0; i = i - 8) kp1[j++] = k[i];
-    //kp1[7] = k[0];
     for (int i = 57; i >= 0; i = i - 8) kp1[j++] = k[i];
-    //[14] = k[9];
-    //kp1[15] = k[1];
     for (int i = 58; i >= 0; i = i - 8) kp1[j++] = k[i];
-    //kp1[21] = k[18];
-    //kp1[22] = k[10];
-    //kp1[23] = k[2];
     for (int i = 59; i >= 35; i = i - 8) kp1[j++] = k[i];
-
     for (int i = 62; i >= 0; i = i - 8) kp1[j++] = k[i];
-    //kp1[7] = k[6];
     for (int i = 61; i >= 0; i = i - 8) kp1[j++] = k[i];
-    //kp1[14] = k[13];
-    //kp1[15] = k[5];
     for (int i = 60; i >= 0; i = i - 8) kp1[j++] = k[i];
-    //kp1[21] = k[20];
-    //kp1[22] = k[12];
-    //kp1[23] = k[4];
     for (int i = 27; i >= 0; i = i - 8) kp1[j++] = k[i];
 }
 
@@ -149,9 +136,8 @@ void PrintAllSubKeys (int rks[16][48]) {
     cout << endl;
 }
 
-void KeyGen () {
+void KeyGen (string Key) {
     int roundNo = 16;
-    string Key = "abcdefgh";
     int KeyBits [64] = {0};
     FindBitsInKey(Key, KeyBits);
     cout << "64-bit Key: ";

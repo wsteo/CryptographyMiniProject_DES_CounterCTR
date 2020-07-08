@@ -1,9 +1,32 @@
 #include "Decryption.h"
 #include <sstream>
 #include <iostream>
+#include <time.h>
+#include <iomanip>
+
 int size_,AllBits[1000],size2,AllBits2[64],cctr[64],plain[64],size3,cipher[64],AllBitsCipher[1000];
 int xor3[64],xor4[64];
-//int counter = 1;
+string nonce;
+
+string randomStringGen(int string_len){
+    string randomStr;
+    string alpha_num = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    srand(time(NULL)); //initialize the random number generator with seed
+    for (int i=0; i<string_len;i++){
+        randomStr[i] = alpha_num[rand() % alpha_num.length()];
+    }
+    return randomStr;
+}
+
+string GetNonce(int stringLen){
+    string nonceValue = randomStringGen(stringLen);
+    string temp;
+    for (int i=0; i<stringLen;i++){
+        temp.push_back(nonceValue[i]);
+    }
+    cout<<endl;
+    return temp;
+}
 
 void plaintext(string PlainText){
     size_ = ceil(PlainText.length() / 8.0) * 8 * 8;
@@ -51,28 +74,33 @@ string EncryptionCounter(string str,int counter){
     int tempPlText[3000];
     int stringSize = ceil(str.length() / 8.0) * 8 * 8;
     int counterview = 1;
+    nonce = GetNonce(4);
 
     for (int i = 0; i < stringSize; i = i + 64){
-        cout<<"\n\nCounter:"<< counterview;
+        cout<<"Counter:"<< counterview <<endl;
 
         stringstream ss;
-        ss << counter;
+        ss << setw(4) << setfill('0') <<counter%9999;
         string ctr;
         ss >> ctr;
 
+        string nonceAndCtr = nonce + ctr;
+        cout<<"Nonce\t\t\t: "<<nonce<<endl;
+        cout<<"Counter\t\t\t: "<<ctr<<endl;
+        cout<<"Complete Counter\t: "<<nonceAndCtr<<endl;
         plaintext(str);
 
         for(int i=0;i<stringSize;i++){
             plain[i]=AllBits[i];
         }
 
-        string output = Encryption(ctr);
+        string output = Encryption(nonceAndCtr);
         EncryptCounter(output);
 
         for(int i=0;i<size2;i++){
             cctr[i]=AllBits2[i];
+            //cout << cctr[i];
         }
-        cout<<endl;
 
         cout <<"Plain Text(FULL)\t: ";
 
@@ -80,7 +108,7 @@ string EncryptionCounter(string str,int counter){
             cout<<plain[i];
         }
 
-        cout <<"\nPlain Text (64bit)\t: ";
+        cout <<"\nPlain Text Block(64bit)\t: ";
         for (int location = 0; location < 64; location++){
             cout << plain[location+(pl_ctr*64)];
             tempPlText[location] = plain[location+(pl_ctr*64)];
@@ -98,7 +126,8 @@ string EncryptionCounter(string str,int counter){
             cout<<xor3[i];
             EncryptedBit[i+(64*pl_ctr)]=xor3[i];
         }
-
+        cout << endl;
+        cout << endl;
         pl_ctr++;
         counter++;
         counterview++;
@@ -118,6 +147,5 @@ string EncryptionCounter(string str,int counter){
         }
         AllEncryptedChars.push_back(char(val));
     }
-
     return AllEncryptedChars;
 }
