@@ -6,12 +6,10 @@
 
 int size_,AllBits[1000],size2,AllBits2[64],cctr[64],plain[64],size3,cipher[64],AllBitsCipher[1000];
 int xor3[64],xor4[64];
-//int counter = 1;
 string nonce;
 
 string randomStringGen(int string_len){
     string randomStr;
-    //char alpha_num[] = {"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"};
     string alpha_num = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     srand(time(NULL)); //initialize the random number generator with seed
     for (int i=0; i<string_len;i++){
@@ -149,6 +147,5 @@ string EncryptionCounter(string str,int counter){
         }
         AllEncryptedChars.push_back(char(val));
     }
-
     return AllEncryptedChars;
 }
