@@ -36,7 +36,7 @@
 		<Unit filename="Decryption.h" />
 		<Unit filename="EncryptCounter.h" />
 		<Unit filename="Encryption.h" />
-		<Unit filename="KeyGenLectureExample.h" />
+		<Unit filename="KeyGeneration.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
