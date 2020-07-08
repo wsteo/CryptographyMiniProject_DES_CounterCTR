@@ -126,11 +126,11 @@ string EncryptionCounter(string str,int counter){
             cout<<xor3[i];
             EncryptedBit[i+(64*pl_ctr)]=xor3[i];
         }
-
+        cout << endl;
+        cout << endl;
         pl_ctr++;
         counter++;
         counterview++;
-        cout << endl;
     }
 
     cout<<"\nEncrypt Bit\t\t: ";
