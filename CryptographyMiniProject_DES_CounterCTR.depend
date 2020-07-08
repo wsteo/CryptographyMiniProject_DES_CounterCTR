@@ -23,10 +23,10 @@
 	<iostream>
 	<string>
 
-1594197331 c:\users\weisong\desktop\projects\github\cryptographyminiproject_des_counterctr\encryption.h
+1594201789 c:\users\weisong\desktop\projects\github\cryptographyminiproject_des_counterctr\encryption.h
 	<iostream>
 	<cmath>
-	"KeyGenLectureExample.h"
+	"KeyGeneration.h"
 
 1594189319 c:\users\weisong\desktop\projects\github\cryptographyminiproject_des_counterctr\decryption.h
 	"Encryption.h"
@@ -56,4 +56,8 @@
 	<iostream>
 	<time.h>
 	<iomanip>
+
+1594189159 c:\users\weisong\desktop\projects\github\cryptographyminiproject_des_counterctr\keygeneration.h
+	<iostream>
+	<string>
 
